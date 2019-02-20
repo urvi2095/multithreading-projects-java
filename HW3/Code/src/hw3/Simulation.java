@@ -12,9 +12,9 @@ import java.util.Random;
  */
 public class Simulation {
 	// List to track simulation events during simulation
-	public static List<SimulationEvent> events;  
+	public static List<SimulationEvent> events;
 
-
+	private static ShopManager shopManager = null;
 
 	/**
 	 * Used by other classes in the simulation to log events
@@ -22,7 +22,16 @@ public class Simulation {
 	 */
 	public static void logEvent(SimulationEvent event) {
 		events.add(event);
-		System.out.println(event);
+		System.out.println(event +" caused by: "+Thread.currentThread().getName());
+	}
+
+	//Adding Getters and Setter for ShopManager Object
+	public synchronized static ShopManager getShopManager() {
+		return shopManager;
+	}
+
+	public static void setShopManager(ShopManager shopManager) {
+		Simulation.shopManager = shopManager;
 	}
 
 	/**
@@ -55,7 +64,8 @@ public class Simulation {
 		//  allowed to be used.
 		events = Collections.synchronizedList(new ArrayList<SimulationEvent>());
 
-
+		//Passing over the input parameters to the Manager class
+		shopManager = new ShopManager(numCustomers, numCooks, numTables, machineCapacity, randomOrders);
 
 
 		// Start the simulation
@@ -65,20 +75,18 @@ public class Simulation {
 				machineCapacity));
 
 
-
 		// Set things up you might need
-		freeTable = new Semaphore(numTables);
-		orderQueue = new LinkedBlockingQueue<Order>();
 
 		// Start up machines
-		Machine grill = new Machine("Grill", FoodType.burger, machineCapacity);
-		Machine fryer = new Machine("Fryer", FoodType.fries, machineCapacity);
-		Machine coffeeMaker2000 = new Machine("CoffeeMaker2000", FoodType.coffee, machineCapacity);
+		System.out.println("Starting all the machines");
+		shopManager.initiateMachines();
 
 		// Let cooks in
+		System.out.println("Starting" + numCooks + "cooks");
 		Thread[] cooks = new Thread[numCooks];
-		for(int i = 0; i < numCooks; i++){
-			cooks[i] = new Thread(new Cook("cook"+i, fryer, grill, coffeeMaker2000));
+		for(int i = 0; i < numCooks; i++)
+		{
+			cooks[i] = new Thread(new Cook("Cook"+i), "cookThread-"+i);
 			cooks[i].start();
 		}
 
@@ -135,25 +143,25 @@ public class Simulation {
 		try {
 			// Wait for customers to finish
 			//   -- you need to add some code here...
-			
-			
-			
-			
-			
+
+
+			//Allowing each thread of the customer to wait for the completion of the another.
+			for(int i = 0; i < customers.length; i++)
+				customers[i].join();
+
 
 			// Then send cooks home...
 			// The easiest way to do this might be the following, where
 			// we interrupt their threads.  There are other approaches
 			// though, so you can change this if you want to.
-			for(int i = 0; i < cooks.length; i++)
-				cooks[i].interrupt();
 
-			logEvent(SimulationEvent.machineEnding(grill));
-			logEvent(SimulationEvent.machineEnding(fryer));
-			logEvent(SimulationEvent.machineEnding(coffeeMaker2000));
-			
-			for(int i = 0; i < cooks.length; i++)
-				cooks[i].join();
+			if(cm.getCurrentlyServing().size() == 0) {
+				for (int i = 0; i < cooks.length; i++)
+					cooks[i].interrupt();
+
+				for(int i = 0; i < cooks.length; i++)
+					cooks[i].join();
+			}
 
 		}
 		catch(InterruptedException e) {

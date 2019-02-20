@@ -1,6 +1,6 @@
-<project name="h2-2" basedir="." default="main">
+<project name="hw3-2" basedir="." default="main">
 
-  <property name="src.dir" value="src/hw2"/>
+  <property name="src.dir" value="src/hw3"/>
 
   <property name="build.dir" value="build"/>
   <property name="classes.dir" value="${build.dir}/classes"/>
@@ -8,7 +8,7 @@
   <property name="lib.dir" value="lib"/>
   <property name="report.dir" location="report" />
 
-  <property name="main-class" value="hw2.Simulation"/>
+  <property name="main-class" value="hw3.Simulation"/>
 
   <path id="classpath">
     <fileset dir="${lib.dir}" includes="**/*.jar"/>
