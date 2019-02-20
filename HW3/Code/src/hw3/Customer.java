@@ -13,7 +13,10 @@ public class Customer implements Runnable {
 	//JUST ONE SET OF IDEAS ON HOW TO SET THINGS UP...
 	private final String name;
 	private final List<Food> order;
-	private final int orderNum;    
+	private final int orderNum;
+
+	//Initialzing the object of the Manager to keep the status of currently serving synchronized with the cook.
+	private ShopManager shopManager = null;
 	
 	private static int runningCounter = 0;
 
@@ -23,13 +26,23 @@ public class Customer implements Runnable {
 	 * would find adding them useful.
 	 */
 	public Customer(String name, List<Food> order) {
+		Simulation.logEvent(SimulationEvent.customerStarting(this));
 		this.name = name;
 		this.order = order;
 		this.orderNum = ++runningCounter;
+		this.shopManager = Simulation.getShopManager();
 	}
 
 	public String toString() {
 		return name;
+	}
+
+	public int getOrderNum() {
+		return orderNum;
+	}
+
+	public List<Food> getOrder() {
+		return order;
 	}
 
 	/** 
@@ -40,7 +53,34 @@ public class Customer implements Runnable {
 	 */
 	public void run() {
 		//YOUR CODE GOES HERE...
-		
+
+		synchronized (shopManager) {
+			//System.out.println(name+ " currentlyServing size:"+cm.getCurrentlyServing().size());
+			while(shopManager.getCurrentlyServing().size() >= shopManager.getNumTables())
+			{
+				//Case when there is no empty table in the Coffee Shop
+				try {
+					//System.out.println("Waiting customer: "+name+" currentlyServing size:"+cm.getCurrentlyServing().size()+" by: "+Thread.currentThread().getName());
+					shopManager.wait(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+			}
+			if(shopManager.getCurrentlyServing().size() < shopManager.getNumTables())
+			{
+				//Case when there is a empty table in the Coffee Shop
+				Simulation.logEvent(SimulationEvent.customerEnteredCoffeeShop(this));
+
+				//Adding to the list of currently serving in order to notify the cook of the customer.
+				shopManager.getCurrentlyServing().add(this);
+				System.out.println(name+" added, size: "+shopManager.getCurrentlyServing().size());
+
+				//Order Status: False, since it is yet to be completed by the Cook.
+				shopManager.getOrderStatus().put(this, false);
+				shopManager.notifyAll();
+			}
+		}
 		
 	}
 }

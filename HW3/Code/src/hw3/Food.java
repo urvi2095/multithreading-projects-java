@@ -14,6 +14,10 @@ public class Food {
 		this.cookTimeMS = cookTimeMS;
 	}
 
+	public int getCookTimeMS() {
+		return cookTimeMS;
+	}
+
 	public String toString() {
 		return name;
 	}
