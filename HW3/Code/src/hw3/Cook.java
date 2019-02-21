@@ -1,5 +1,6 @@
 package hw3;
 
+import java.util.List;
 
 /**
  * Cooks are simulation actors that have at least one field, a name.
@@ -95,7 +96,7 @@ public class Cook implements Runnable {
 
 						shopManager.getCurrentlyServing().remove(servingCustomer);
 						Simulation.logEvent(SimulationEvent.customerLeavingCoffeeShop(servingCustomer));
-						//System.out.println(servingCustomer+" removed, size: "+shopManager.getCurrentlyServing().size());
+						System.out.println(servingCustomer+" removed, size: "+shopManager.getCurrentlyServing().size());
 						shopManager.notifyAll();
 					}
 					else

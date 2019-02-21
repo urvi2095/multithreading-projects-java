@@ -55,12 +55,12 @@ public class Customer implements Runnable {
 		//YOUR CODE GOES HERE...
 
 		synchronized (shopManager) {
-			//System.out.println(name+ " currentlyServing size:"+cm.getCurrentlyServing().size());
+			//System.out.println(name+ " currentlyServing size:"+shopManager.getCurrentlyServing().size());
 			while(shopManager.getCurrentlyServing().size() >= shopManager.getNumTables())
 			{
 				//Case when there is no empty table in the Coffee Shop
 				try {
-					//System.out.println("Waiting customer: "+name+" currentlyServing size:"+cm.getCurrentlyServing().size()+" by: "+Thread.currentThread().getName());
+					//System.out.println("Waiting customer: "+name+" currentlyServing size:"+shopManager.getCurrentlyServing().size()+" by: "+Thread.currentThread().getName());
 					shopManager.wait(10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

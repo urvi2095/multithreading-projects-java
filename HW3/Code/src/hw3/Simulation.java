@@ -155,13 +155,14 @@ public class Simulation {
 			// we interrupt their threads.  There are other approaches
 			// though, so you can change this if you want to.
 
-			if(cm.getCurrentlyServing().size() == 0) {
+			System.out.println(shopManager.getCurrentlyServing().size());
+			//if(shopManager.getCurrentlyServing().size() == 0) {
 				for (int i = 0; i < cooks.length; i++)
 					cooks[i].interrupt();
 
 				for(int i = 0; i < cooks.length; i++)
 					cooks[i].join();
-			}
+			//}
 
 		}
 		catch(InterruptedException e) {
@@ -211,15 +212,21 @@ public class Simulation {
 
 		// Run the simulation and then 
 		//   feed the result into the method to validate simulation.
-		System.out.println("Did it work? " + 
-				Validate.validateSimulation(
-						runSimulation(
-								numCustomers, numCooks, 
-								numTables, machineCapacity,
-								randomOrders
-								)
-						)
-				);
+//		System.out.println("Did it work? " +
+////				Validate.validateSimulation(
+////						runSimulation(
+////								numCustomers, numCooks,
+////								numTables, machineCapacity,
+////								randomOrders
+////								)
+////						)
+////				);
+
+		runSimulation(
+				numCustomers, numCooks,
+				numTables, machineCapacity,
+				randomOrders
+		);
 	}
 
 }

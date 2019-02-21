@@ -1,4 +1,4 @@
-package com.neu;
+package hw3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -108,6 +108,4 @@ public class ShopManager {
     public HashMap<Customer, Boolean> getOrderStatus() {
         return orderStatus;
     }
-
-
 }
