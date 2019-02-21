@@ -33,11 +33,15 @@ public class Validate {
 	 */
 	public static boolean validateSimulation(List<SimulationEvent> events) {
 		try {
+			System.out.println("-----------------------Validations----------------------");
 			check(events.get(0).event == SimulationEvent.EventType.SimulationStarting,
 					"Simulation didn't start with initiation event");
+			System.out.println("Simulation started with the Initiation event");
+
 			check(events.get(events.size()-1).event == 
 					SimulationEvent.EventType.SimulationEnded,
 					"Simulation didn't end with termination event");
+			System.out.println("Simulation end with the termination event");
 
 			/* In hw3 you will write validation code for things such as:
 				Should not have more eaters than specified
@@ -49,6 +53,60 @@ public class Validate {
 				Eater should not place more than one order
 				Cook should not work on order before it is placed
 			 */
+
+			//To Check if Simulation does not have more eaters than specified
+			int countOfCustomersServed = 0;
+			int noOfCustomersSpecified = events.get(0).simParams[0];
+			for(SimulationEvent eachEvent : events) {
+				if(eachEvent.event == SimulationEvent.EventType.CustomerReceivedOrder){
+					countOfCustomersServed++;
+				}
+			}
+			check(countOfCustomersServed <= noOfCustomersSpecified,
+					"Simulation had more number of eaters than specified");
+			System.out.println("Simulation did not have more eaters than specified");
+
+			//To check if Simulation does not have more cooks than specified
+			int countOfCooks = 0;
+			int noOfCooksSpecified = events.get(0).simParams[1];
+			for(SimulationEvent eachEvent : events) {
+				if(eachEvent.event == SimulationEvent.EventType.CookEnding){
+					countOfCooks++;
+				}
+			}
+			check(countOfCooks <= noOfCooksSpecified,
+					"Simulation had more number of cooks than specified");
+			System.out.println("Simulation did not have more cooks than specified");
+
+			//To check if Eater should not receive order until cook completes it
+			for(int i=0; i < events.size()-2; i++) {
+				if(events.get(i).event == SimulationEvent.EventType.CookCompletedOrder){
+					check(events.get(i+1).event == SimulationEvent.EventType.CustomerReceivedOrder,
+							"Eater did not receive the order right after the cook completed it");
+				}
+			}
+			System.out.println("Eater did not receive order until cook completed it");
+
+			//To check that Eater should not leave coffee shop until order is received
+			for(int i=0; i < events.size()-2; i++) {
+				if(events.get(i).event == SimulationEvent.EventType.CustomerReceivedOrder){
+					check(events.get(i+1).event == SimulationEvent.EventType.CustomerLeavingCoffeeShop,
+							"Eater left the coffee shop before receiving the order");
+				}
+			}
+			System.out.println("Eater did not leave coffee shop until order was received");
+
+			//To check that Cook should not work on an order before it is placed
+			for(int i=0; i < events.size()-2; i++) {
+				if(events.get(i).event == SimulationEvent.EventType.CustomerPlacedOrder){
+					int orderNum = events.get(i).orderNumber;
+					check(events.get(i+1).orderNumber == orderNum &&
+							events.get(i+1).event == SimulationEvent.EventType.CookReceivedOrder,
+							"Order numbers are different OR Cook started working on an order before it was placed");
+
+				}
+			}
+			System.out.println("Cook did not work on an order before it was placed");
 
 			return true;
 		} catch (InvalidSimulationException e) {
