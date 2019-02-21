@@ -55,12 +55,11 @@ public class Cook implements Runnable {
 				while (true) {
 					//YOUR CODE GOES HERE...
 
-					while(shopManager.getCurrentlyServing().size() == 0)
-					{
+					while (shopManager.getCurrentlyServing().size() == 0) {
 						shopManager.wait(10);
 					}
 
-					if(shopManager.getCurrentlyServing().size() > 0) {
+					if (shopManager.getCurrentlyServing().size() > 0) {
 						busy = true;
 						Customer servingCustomer = shopManager.getCurrentlyServing().get(0);
 
@@ -68,26 +67,21 @@ public class Cook implements Runnable {
 						int orderNum = servingCustomer.getOrderNum();
 						Simulation.logEvent(SimulationEvent.customerPlacedOrder(servingCustomer, order, orderNum));
 						Simulation.logEvent(SimulationEvent.cookReceivedOrder(this, order, orderNum));
-						for(Food f : order)
-						{
+						for (Food f : order) {
 							Machine m = shopManager.getMachineInstance(f);
-							if(m != null)
-							{
+							if (m != null) {
 								//System.out.println("Got machine:"+m.toString()+" for food:"+f.toString()+" for cust:"+
 								//servingCustomer.toString()+" by cook:"+this.toString()+" by:"+Thread.currentThread().getName());
 								Simulation.logEvent(SimulationEvent.cookStartedFood(this, f, orderNum));
 								boolean itemStatus = m.makeFood(orderNum);
 
 								//Thread.currentThread().join();
-								if(!itemStatus)
-								{
-									System.out.println("Cooking failed order:"+servingCustomer.toString()+" by cook: "+this.toString()+" by: "+Thread.currentThread().getName());
-								}
-								else
+								if (!itemStatus) {
+									System.out.println("Cooking failed order:" + servingCustomer.toString() + " by cook: " + this.toString() + " by: " + Thread.currentThread().getName());
+								} else
 									Simulation.logEvent(SimulationEvent.cookFinishedFood(this, f, orderNum));
-							}
-							else
-								System.out.println("Machine was not found in Cook class for food type:"+f.name);
+							} else
+								System.out.println("Machine was not found in Cook class for food type:" + f.name);
 						}
 
 						Simulation.logEvent(SimulationEvent.cookCompletedOrder(this, orderNum));
@@ -96,13 +90,12 @@ public class Cook implements Runnable {
 
 						shopManager.getCurrentlyServing().remove(servingCustomer);
 						Simulation.logEvent(SimulationEvent.customerLeavingCoffeeShop(servingCustomer));
-						System.out.println(servingCustomer+" removed, size: "+shopManager.getCurrentlyServing().size());
+						System.out.println(servingCustomer + " removed, size: " + shopManager.getCurrentlyServing().size());
 						shopManager.notifyAll();
 					}
 					else
-						System.out.println("No orders by :"+this.toString()+" by:"+Thread.currentThread().getName());
+						System.out.println("No orders by :" + this.toString() + " by:" + Thread.currentThread().getName());
 					busy = false;
-
 				}
 			}
 		}

@@ -67,8 +67,8 @@ public class Customer implements Runnable {
 				}
 
 			}
-			if(shopManager.getCurrentlyServing().size() < shopManager.getNumTables())
-			{
+			//if(shopManager.getCurrentlyServing().size() < shopManager.getNumTables())
+			//{
 				//Case when there is a empty table in the Coffee Shop
 				Simulation.logEvent(SimulationEvent.customerEnteredCoffeeShop(this));
 
@@ -78,8 +78,17 @@ public class Customer implements Runnable {
 
 				//Order Status: False, since it is yet to be completed by the Cook.
 				shopManager.getOrderStatus().put(this, false);
-				shopManager.notifyAll();
-			}
+
+				if(shopManager.getOrderStatus().get(this))
+					shopManager.notifyAll();
+				else {
+					try {
+						shopManager.wait(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			//}
 		}
 		
 	}

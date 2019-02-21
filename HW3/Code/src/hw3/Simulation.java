@@ -155,7 +155,7 @@ public class Simulation {
 			// we interrupt their threads.  There are other approaches
 			// though, so you can change this if you want to.
 
-			//System.out.println(shopManager.getCurrentlyServing().size());
+			System.out.println("Interrupting Cooks now since all Customers are served. ");
 			//if(shopManager.getCurrentlyServing().size() == 0) {
 				for (int i = 0; i < cooks.length; i++)
 					cooks[i].interrupt();
@@ -170,9 +170,9 @@ public class Simulation {
 		}
 
 		// Shut down machines
-
-
-
+		for (Machine machine: shopManager.getActiveMachines()) {
+			logEvent(SimulationEvent.machineEnding(machine));
+		}
 
 
 		// Done with simulation		
@@ -209,24 +209,17 @@ public class Simulation {
 		int machineCapacity = 4;
 		boolean randomOrders = false;
 
-
 		// Run the simulation and then 
 		//   feed the result into the method to validate simulation.
-//		System.out.println("Did it work? " +
-////				Validate.validateSimulation(
-////						runSimulation(
-////								numCustomers, numCooks,
-////								numTables, machineCapacity,
-////								randomOrders
-////								)
-////						)
-////				);
-
-		runSimulation(
-				numCustomers, numCooks,
-				numTables, machineCapacity,
-				randomOrders
-		);
+		System.out.println("Did it work? " +
+				Validate.validateSimulation(
+						runSimulation(
+								numCustomers, numCooks,
+								numTables, machineCapacity,
+								randomOrders
+								)
+						)
+				);
 	}
 
 }
