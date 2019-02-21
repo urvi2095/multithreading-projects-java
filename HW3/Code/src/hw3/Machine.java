@@ -15,7 +15,7 @@ public class Machine {
 	//YOUR CODE GOES HERE...
 	private int currentlyServing;
 	public int capacityIn;
-	private ShopManager shopManager = null;
+	private Object shopManager = null;
 
 
 	/**
@@ -34,7 +34,7 @@ public class Machine {
 		Simulation.logEvent(SimulationEvent.machineStarting(this, foodIn, capacityIn));
 		this.capacityIn = capacityIn;
 		currentlyServing = 0;
-		shopManager = Simulation.getShopManager();
+		shopManager = new Object();
 	}
 	
 

@@ -155,7 +155,7 @@ public class Simulation {
 			// we interrupt their threads.  There are other approaches
 			// though, so you can change this if you want to.
 
-			System.out.println(shopManager.getCurrentlyServing().size());
+			//System.out.println(shopManager.getCurrentlyServing().size());
 			//if(shopManager.getCurrentlyServing().size() == 0) {
 				for (int i = 0; i < cooks.length; i++)
 					cooks[i].interrupt();
