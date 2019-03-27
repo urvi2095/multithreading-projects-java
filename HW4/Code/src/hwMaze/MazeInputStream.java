@@ -17,7 +17,7 @@ public class MazeInputStream extends ObjectInputStream {
 	@Override
 	protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
 	    ObjectStreamClass desc = super.readClassDescriptor();
-	    if (desc.getName().equals("cmsc433_p4")) {
+	    if (desc.getName().equals("cmsc433_p4.Maze")) {
 	        return ObjectStreamClass.lookup(Maze.class);
 	    }
 	    return desc;
