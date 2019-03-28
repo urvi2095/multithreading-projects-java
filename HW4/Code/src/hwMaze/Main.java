@@ -32,7 +32,7 @@ public class Main
         {
         		new STMazeSolverRec(maze),
                 new STMazeSolverDFS(maze),
-                new STMazeSolverBFS(maze), 
+                new STMazeSolverBFS(maze),
                 new StudentMTMazeSolver(maze),  //uncomment this line when you are ready to test yours
         };
 

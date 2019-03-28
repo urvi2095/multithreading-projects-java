@@ -24,6 +24,7 @@ public class StudentMTMazeSolver extends SkippingMazeSolver
     {
         super(maze);
     }
+    public static int count=0;
 
     public List<Direction> solve()
     {
@@ -71,6 +72,7 @@ public class StudentMTMazeSolver extends SkippingMazeSolver
             }
         }
 
+        System.out.println("The total number of nodes traversed is: "+count);
         return solutionPath;
 
     }
@@ -93,6 +95,7 @@ public class StudentMTMazeSolver extends SkippingMazeSolver
             try
             {
                 choiceStack.push(this.head);
+                count=count+1;
                 while (!choiceStack.isEmpty())
                 {
                     ch = choiceStack.peek();
@@ -101,9 +104,14 @@ public class StudentMTMazeSolver extends SkippingMazeSolver
                         // backtrack.
                         choiceStack.pop();
                         if (!choiceStack.isEmpty()) choiceStack.peek().choices.pop();
+//                        if (maze.display != null)
+//                        {
+//                            maze.setColor(ch.at, 0);
+//                        }
                         continue;
                     }
                     choiceStack.push(follow(ch.at, ch.choices.peek()));
+                    count++;
                 }
                 // No solution found.
                 return null;
@@ -120,6 +128,7 @@ public class StudentMTMazeSolver extends SkippingMazeSolver
                 solutionPath.push(followDir);
 
                 if (maze.display != null) maze.display.updateDisplay();
+                markPath(solutionPath, 1);
                 return pathToFullPath(solutionPath);
             }
 

@@ -24,13 +24,13 @@ public class STMazeSolverDFS extends SkippingMazeSolver
      * the solution path, which we return. At any given point in the execution,
      * the list of first choices yields the current path. That is, if the choice
      * stack is:
-     * 
+     *
      * <pre>
      * [[E W S] [E W] [S N] [N]]
      * </pre>
-     * 
+     *
      * Then the current path is given by the list:
-     * 
+     *
      * <pre>
      * [E E S N]
      * </pre>
@@ -62,6 +62,7 @@ public class STMazeSolverDFS extends SkippingMazeSolver
         {
             Iterator<Choice> iter = choiceStack.iterator();
             LinkedList<Direction> solutionPath = new LinkedList<Direction>();
+
             while (iter.hasNext())
             {
             	ch = iter.next();
