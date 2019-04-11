@@ -78,10 +78,10 @@ public class StudentMTMazeSolver extends SkippingMazeSolver
     }
 
     private class DepthFirstSearch implements Callable<List<Direction>>{
-        Choice head;
+        Choice current;
         Direction followDir;
-        public DepthFirstSearch(Choice head, Direction followDir){
-            this.head = head;
+        public DepthFirstSearch(Choice current, Direction followDir){
+            this.current = current;
             this.followDir = followDir;
 
         }
@@ -94,7 +94,7 @@ public class StudentMTMazeSolver extends SkippingMazeSolver
 
             try
             {
-                choiceStack.push(this.head);
+                choiceStack.push(this.current);
                 count=count+1;
                 while (!choiceStack.isEmpty())
                 {
