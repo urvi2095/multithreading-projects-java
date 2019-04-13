@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="hw.akka"
+		module="hw-akka_2.12"
+		revision="d92802d0+20190412-1739"
+		conf="runtime-internal"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
+		date="20190412173930"/>
+	<dependencies>
+		<module organisation="org.scala-lang" name="scala-library">
+			<revision name="2.12.8" status="release" pubdate="20181204051556" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" extra-info.apiURL="http://www.scala-lang.org/api/2.12.8/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="0">
+				<license name="Apache-2.0" url="https://www.apache.org/licenses/LICENSE-2.0"/>
+				<metadata-artifact status="no" details="" size="2656" time="0" location="/Users/urvi/.ivy2/cache/org.scala-lang/scala-library/ivy-2.12.8.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.8/scala-library-2.12.8.pom"/>
+				<caller organisation="hw.akka" name="hw-akka_2.12" conf="compile, runtime-internal, runtime, optional" rev="2.12.8" rev-constraint-default="2.12.8" rev-constraint-dynamic="2.12.8" callerrev="d92802d0+20190412-1739"/>
+				<artifacts>
+					<artifact name="scala-library" type="jar" ext="jar" status="no" details="" size="5272591" time="0" location="/Users/urvi/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.8.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.8/scala-library-2.12.8.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="hw.akka" name="akka-actor_2.12">
+			<revision name="2.5.22" error="not found" downloaded="false" searched="false" conf="default(compile)" position="-1">
+				<caller organisation="hw.akka" name="hw-akka_2.12" conf="compile, runtime-internal, runtime, optional" rev="2.5.22" rev-constraint-default="2.5.22" rev-constraint-dynamic="2.5.22" callerrev="d92802d0+20190412-1739"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>

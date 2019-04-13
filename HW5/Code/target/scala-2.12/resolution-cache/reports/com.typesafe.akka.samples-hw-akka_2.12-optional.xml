@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="com.typesafe.akka.samples"
+		module="hw-akka_2.12"
+		revision="d92802d0+20190412-1815"
+		conf="optional"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
+		date="20190412181517"/>
+	<dependencies>
+	</dependencies>
+</ivy-report>
