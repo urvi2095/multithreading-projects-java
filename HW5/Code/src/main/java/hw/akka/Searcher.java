@@ -70,7 +70,7 @@ public class Searcher extends AbstractActor {
 		//Implementing TSP on the Matrix
 		TSPDynamicProgramming tspDynamicProgramming = new TSPDynamicProgramming(start_end_city, matrix);
 		double tourCost = tspDynamicProgramming.getTourCost();
-		//System.out.println(self().path().name() + "-> Tour cost: "+ tourCost);
+		System.out.println(getSelf().path().name() + "Tour Cost" + tourCost);
 
 		//Comparing with Inputted Length Threshold
 		if(tourCost <= path_length_threshold) {
@@ -94,8 +94,15 @@ public class Searcher extends AbstractActor {
 	 */
 	public double[][] getMatrix(String filename) throws IOException {
 		Scanner s = new Scanner(new File(filename));
+
 		int size = countLines(filename);
+
+		if(size != countColumns(filename)){
+			System.out.println("The Number of Rows != Number of Columns in the given file: " + filename);
+			System.exit(1);
+		}
 		double matrix[][] = new double[size][size];
+
 		while (s.hasNext()) {
 			for (int i = 0; i < matrix.length; i++) {
 				for (int col = 0; col < matrix.length; col++) {
@@ -128,9 +135,39 @@ public class Searcher extends AbstractActor {
 				}
 			}
 			return (count == 0 && !empty) ? 1 : count;
+		} catch (FileNotFoundException e) {
+			System.out.println("File '" + filename + "' was not found in the root directory of this project!!");
+			System.exit(1);
 		} finally {
 			is.close();
 		}
+		return 0;
+	}
+
+	public static int countColumns(String filename) throws IOException {
+		InputStream is = new BufferedInputStream(new FileInputStream(filename));
+		try {
+			byte[] c = new byte[1024];
+			int count = 0;
+			int readChars = 0;
+			while ((readChars = is.read(c)) != -1) {
+				for (int i = 0; i < readChars; ++i) {
+					if(c[i] == ' '){
+						count++;
+					}
+					else if (c[i] == '\n') {
+						count++;
+						return count;
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("File '" + filename + "' was not found in the root directory of this project!!");
+			System.exit(1);
+		} finally {
+			is.close();
+		}
+		return 0;
 	}
 
 }

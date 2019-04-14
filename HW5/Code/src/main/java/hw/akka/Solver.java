@@ -25,10 +25,10 @@ public class Solver extends AbstractActor {
 	private int path_length_threshold;
 	private ArrayList<ActorRef> searcherActors = new ArrayList<>();
 
-	public Solver(String filename, String start_end_city, String path_length_threshold) {
+	public Solver(String filename, int start_end_city, int path_length_threshold) {
 		this.filename = filename;
-		this.start_end_city = Integer.valueOf(start_end_city);
-		this.path_length_threshold = Integer.valueOf(path_length_threshold);
+		this.start_end_city = start_end_city;
+		this.path_length_threshold = path_length_threshold;
 	}
 
 	@Override
