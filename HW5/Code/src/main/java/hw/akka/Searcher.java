@@ -93,25 +93,32 @@ public class Searcher extends AbstractActor {
 	 *
 	 */
 	public double[][] getMatrix(String filename) throws IOException {
-		Scanner s = new Scanner(new File(filename));
+		try {
+			Scanner s = new Scanner(new File(filename));
 
-		int size = countLines(filename);
+			int size = countLines(filename);
 
-		if(size != countColumns(filename)){
-			System.out.println("The Number of Rows != Number of Columns in the given file: " + filename);
+			if(size != countColumns(filename)){
+				System.out.println("The Number of Rows != Number of Columns in the given file: " + filename);
+				System.exit(1);
+			}
+			double matrix[][] = new double[size][size];
+
+				while (s.hasNext()) {
+					for (int i = 0; i < matrix.length; i++) {
+						for (int col = 0; col < matrix.length; col++) {
+							matrix[i][col] = s.nextDouble();
+						}
+					}
+				}
+
+			s.close();
+			return  matrix;
+		} catch (FileNotFoundException e) {
+			System.out.println("File '" + filename + "' was not found in the root directory of this project!!");
 			System.exit(1);
 		}
-		double matrix[][] = new double[size][size];
-
-		while (s.hasNext()) {
-			for (int i = 0; i < matrix.length; i++) {
-				for (int col = 0; col < matrix.length; col++) {
-					matrix[i][col] = s.nextDouble();
-				}
-			}
-		}
-		s.close();
-		return  matrix;
+		return null;
 	}
 
 	/**
