@@ -4,16 +4,16 @@
 	<info
 		organisation="com.typesafe.akka.samples"
 		module="hw-akka_2.12"
-		revision="d92802d0+20190412-1815"
+		revision="7ce025b1"
 		conf="test"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20190412181517"/>
+		date="20190417192205"/>
 	<dependencies>
 		<module organisation="com.typesafe.akka" name="akka-actor_2.12">
 			<revision name="2.5.22" status="release" pubdate="20190403040609" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://akka.io/" extra-info.apiURL="https://doc.akka.io/api/akka/2.5.22" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="1">
 				<license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
 				<metadata-artifact status="no" details="" size="3260" time="0" location="/Users/urvi/.ivy2/cache/com.typesafe.akka/akka-actor_2.12/ivy-2.5.22.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/akka/akka-actor_2.12/2.5.22/akka-actor_2.12-2.5.22.pom"/>
-				<caller organisation="com.typesafe.akka.samples" name="hw-akka_2.12" conf="test, compile, runtime" rev="2.5.22" rev-constraint-default="2.5.22" rev-constraint-dynamic="2.5.22" callerrev="d92802d0+20190412-1815"/>
+				<caller organisation="com.typesafe.akka.samples" name="hw-akka_2.12" conf="test, compile, runtime" rev="2.5.22" rev-constraint-default="2.5.22" rev-constraint-dynamic="2.5.22" callerrev="7ce025b1"/>
 				<artifacts>
 					<artifact name="akka-actor_2.12" type="jar" ext="jar" status="no" details="" size="3519170" time="0" location="/Users/urvi/.ivy2/cache/com.typesafe.akka/akka-actor_2.12/jars/akka-actor_2.12-2.5.22.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/typesafe/akka/akka-actor_2.12/2.5.22/akka-actor_2.12-2.5.22.jar"/>
@@ -49,9 +49,9 @@
 			<revision name="2.12.8" status="release" pubdate="20181204051556" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" extra-info.apiURL="http://www.scala-lang.org/api/2.12.8/" downloaded="false" searched="false" default="false" conf="default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master" position="0">
 				<license name="Apache-2.0" url="https://www.apache.org/licenses/LICENSE-2.0"/>
 				<metadata-artifact status="no" details="" size="2656" time="0" location="/Users/urvi/.ivy2/cache/org.scala-lang/scala-library/ivy-2.12.8.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.8/scala-library-2.12.8.pom"/>
+				<caller organisation="com.typesafe.akka.samples" name="hw-akka_2.12" conf="test, compile, runtime" rev="2.12.8" rev-constraint-default="2.12.8" rev-constraint-dynamic="2.12.8" callerrev="7ce025b1"/>
 				<caller organisation="org.scala-lang.modules" name="scala-java8-compat_2.12" conf="compile, runtime" rev="2.12.8" rev-constraint-default="2.12.8" rev-constraint-dynamic="2.12.8" callerrev="0.8.0"/>
 				<caller organisation="com.typesafe.akka" name="akka-actor_2.12" conf="default, compile, runtime, master" rev="2.12.8" rev-constraint-default="2.12.8" rev-constraint-dynamic="2.12.8" callerrev="2.5.22"/>
-				<caller organisation="com.typesafe.akka.samples" name="hw-akka_2.12" conf="test, compile, runtime" rev="2.12.8" rev-constraint-default="2.12.8" rev-constraint-dynamic="2.12.8" callerrev="d92802d0+20190412-1815"/>
 				<artifacts>
 					<artifact name="scala-library" type="jar" ext="jar" status="no" details="" size="5272591" time="0" location="/Users/urvi/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.8.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.8/scala-library-2.12.8.jar"/>
