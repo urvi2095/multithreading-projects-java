@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
+	<info organisation="com.typesafe.akka.samples"
+		module="akka-sample-main-java_2.12"
+		revision="059018da+20190409-0112"
+		status="integration"
+		publication="20190409011251"
+	>
+		<license name="CC0" url="http://creativecommons.org/publicdomain/zero/1.0" />
+		<description>
+		akka-sample-main-java
+		</description>
+	</info>
+	<configurations>
+		<conf name="compile" visibility="public" description=""/>
+		<conf name="runtime" visibility="public" description="" extends="compile"/>
+		<conf name="test" visibility="public" description="" extends="runtime"/>
+		<conf name="provided" visibility="public" description=""/>
+		<conf name="optional" visibility="public" description=""/>
+		<conf name="compile-internal" visibility="private" description="" extends="compile,optional,provided"/>
+		<conf name="runtime-internal" visibility="private" description="" extends="runtime,optional"/>
+		<conf name="test-internal" visibility="private" description="" extends="test,optional,provided"/>
+		<conf name="plugin" visibility="private" description=""/>
+		<conf name="pom" visibility="public" description=""/>
+		<conf name="scala-tool" visibility="private" description=""/>
+	</configurations>
+	<publications>
+		<artifact name="akka-sample-main-java_2.12" type="pom" ext="pom" conf="pom"/>
+		<artifact name="akka-sample-main-java_2.12" type="jar" ext="jar" conf="compile"/>
+		<artifact name="akka-sample-main-java_2.12" type="src" ext="jar" conf="compile" e:classifier="sources"/>
+		<artifact name="akka-sample-main-java_2.12" type="doc" ext="jar" conf="compile" e:classifier="javadoc"/>
+	</publications>
+	<dependencies>
+		<dependency org="org.scala-lang" name="scala-compiler" rev="2.12.8" conf="scala-tool->default,optional(default)"/>
+		<dependency org="org.scala-lang" name="scala-library" rev="2.12.8" conf="scala-tool->default,optional(default);compile->default(compile)"/>
+		<dependency org="com.typesafe.akka" name="akka-actor_2.12" rev="2.5.22" conf="compile->default(compile)"/>
+	</dependencies>
+</ivy-module>
