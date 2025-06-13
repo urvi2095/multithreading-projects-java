@@ -40,7 +40,7 @@ public class Simulation
             bidderThreads[i].start();
         }
         
-        // Join on the sellers
+        // Join the sellers
         for (int i=0; i<nrSellers; ++i)
         {
             try
@@ -53,7 +53,7 @@ public class Simulation
             }
         }
         
-        // Join on the bidders
+        // Join the bidders
         for (int i=0; i<nrBidders; ++i)
         {
             try
